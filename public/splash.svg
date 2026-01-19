@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#0a0b0d"/>
+  
+  <!-- Center logo -->
+  <g transform="translate(256, 200)">
+    <!-- O -->
+    <circle cx="-80" cy="0" r="40" fill="none" stroke="#33ff33" stroke-width="8"/>
+    <!-- X -->
+    <g stroke="#fc401f" stroke-width="8" stroke-linecap="round">
+      <line x1="-30" y1="-30" x2="30" y2="30"/>
+      <line x1="30" y1="-30" x2="-30" y2="30"/>
+    </g>
+    <!-- O -->
+    <circle cx="80" cy="0" r="40" fill="none" stroke="#33ff33" stroke-width="8"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="256" y="320" font-family="monospace" font-size="48" fill="#33ff33" text-anchor="middle" letter-spacing="12">OXO</text>
+  
+  <!-- Subtitle -->
+  <text x="256" y="360" font-family="monospace" font-size="14" fill="#717886" text-anchor="middle" letter-spacing="4">EDSAC • 1952</text>
+  
+  <!-- Loading dots -->
+  <g fill="#33ff33">
+    <circle cx="226" cy="420" r="6" opacity="0.3"/>
+    <circle cx="256" cy="420" r="6" opacity="0.6"/>
+    <circle cx="286" cy="420" r="6" opacity="1"/>
+  </g>
+</svg>

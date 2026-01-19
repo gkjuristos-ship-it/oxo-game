@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#0a0b0d"/>
+  <rect x="56" y="56" width="400" height="400" rx="24" fill="#1a1c20" stroke="#33ff33" stroke-width="4"/>
+  <!-- O -->
+  <circle cx="156" cy="156" r="50" fill="none" stroke="#33ff33" stroke-width="12"/>
+  <!-- X -->
+  <line x1="306" y1="106" x2="406" y2="206" stroke="#fc401f" stroke-width="12" stroke-linecap="round"/>
+  <line x1="406" y1="106" x2="306" y2="206" stroke="#fc401f" stroke-width="12" stroke-linecap="round"/>
+  <!-- O -->
+  <circle cx="156" cy="356" r="50" fill="none" stroke="#33ff33" stroke-width="12"/>
+  <!-- Grid lines -->
+  <line x1="232" y1="80" x2="232" y2="432" stroke="#33ff33" stroke-width="3" opacity="0.5"/>
+  <line x1="280" y1="80" x2="280" y2="432" stroke="#33ff33" stroke-width="3" opacity="0.5"/>
+  <line x1="80" y1="232" x2="432" y2="232" stroke="#33ff33" stroke-width="3" opacity="0.5"/>
+  <line x1="80" y1="280" x2="432" y2="280" stroke="#33ff33" stroke-width="3" opacity="0.5"/>
+  <!-- Text -->
+  <text x="256" y="400" font-family="monospace" font-size="48" fill="#33ff33" text-anchor="middle">OXO</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0a0b0d"/>
+  
+  <!-- Main container -->
+  <rect x="350" y="100" width="500" height="430" rx="24" fill="#1a1c20" stroke="#33ff33" stroke-width="3"/>
+  
+  <!-- Game grid -->
+  <rect x="400" y="150" width="400" height="300" fill="#0f1012" stroke="#33ff33" stroke-width="2"/>
+  
+  <!-- Grid lines -->
+  <line x1="533" y1="150" x2="533" y2="450" stroke="#33ff33" stroke-width="2"/>
+  <line x1="667" y1="150" x2="667" y2="450" stroke="#33ff33" stroke-width="2"/>
+  <line x1="400" y1="250" x2="800" y2="250" stroke="#33ff33" stroke-width="2"/>
+  <line x1="400" y1="350" x2="800" y2="350" stroke="#33ff33" stroke-width="2"/>
+  
+  <!-- X marks -->
+  <g stroke="#fc401f" stroke-width="8" stroke-linecap="round">
+    <line x1="430" y1="180" x2="503" y2="220"/>
+    <line x1="503" y1="180" x2="430" y2="220"/>
+    
+    <line x1="563" y1="280" x2="637" y2="320"/>
+    <line x1="637" y1="280" x2="563" y2="320"/>
+  </g>
+  
+  <!-- O marks -->
+  <g fill="none" stroke="#33ff33" stroke-width="8">
+    <circle cx="600" cy="200" r="35"/>
+    <circle cx="467" cy="400" r="35"/>
+    <circle cx="733" cy="300" r="35"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="600" y="520" font-family="monospace" font-size="36" fill="#33ff33" text-anchor="middle" letter-spacing="8">OXO • EDSAC • 1952</text>
+  
+  <!-- Glow effect -->
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>
