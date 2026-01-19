@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const appUrl = (process.env.NEXT_PUBLIC_APP_URL?.trim() || 'https://app-nu-two-69.vercel.app').replace(/^http:/, 'https:');
+  const appUrl = (process.env.NEXT_PUBLIC_APP_URL?.replace(/\s/g, '') || 'https://app-nu-two-69.vercel.app').replace(/^http:/, 'https:');
 
   // Account association generated from Farcaster portal
   const manifest = {
     accountAssociation: {
-      header: process.env.FARCASTER_HEADER?.trim() || 'eyJmaWQiOjIzNjUzMTMsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhiMzY1MzM1YWYxNDkwZDcxODA0N2Q1NmEzNjM5ODc3ZUFmZGU0ZjgyIn0',
-      payload: process.env.FARCASTER_PAYLOAD?.trim() || 'eyJkb21haW4iOiJhcHAtbnUtdHdvLTY5LnZlcmNlbC5hcHAifQ',
-      signature: process.env.FARCASTER_SIGNATURE?.trim() || 'JMYZIWWYEwo2w/NrWiOMQcF+uPa++fvOkb997qK444IqDx8H73MykTXhjD8PxSMqfa0Ipy2hV0Fs0KFwIWVHJhw=',
+      header: process.env.FARCASTER_HEADER?.replace(/\s/g, '') || 'eyJmaWQiOjIzNjUzMTMsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhiMzY1MzM1YWYxNDkwZDcxODA0N2Q1NmEzNjM5ODc3ZUFmZGU0ZjgyIn0',
+      payload: process.env.FARCASTER_PAYLOAD?.replace(/\s/g, '') || 'eyJkb21haW4iOiJhcHAtbnUtdHdvLTY5LnZlcmNlbC5hcHAifQ',
+      signature: process.env.FARCASTER_SIGNATURE?.replace(/\s/g, '') || 'JMYZIWWYEwo2w/NrWiOMQcF+uPa++fvOkb997qK444IqDx8H73MykTXhjD8PxSMqfa0Ipy2hV0Fs0KFwIWVHJhw=',
     },
     miniapp: {
       version: '1',
