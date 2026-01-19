@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim() || 'https://app-nu-two-69.vercel.app';
+  const appUrl = (process.env.NEXT_PUBLIC_APP_URL?.trim() || 'https://app-nu-two-69.vercel.app').replace(/^http:/, 'https:');
 
   // Account association generated from Farcaster portal
   const manifest = {
