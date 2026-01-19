@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const appUrl = (process.env.NEXT_PUBLIC_APP_URL?.replace(/\s/g, '') || 'https://app-nu-two-69.vercel.app').replace(/^http:/, 'https:');
+  // Always use production URL for Farcaster manifest
+  const appUrl = 'https://app-nu-two-69.vercel.app';
 
   // Account association generated from Farcaster portal
   const manifest = {
