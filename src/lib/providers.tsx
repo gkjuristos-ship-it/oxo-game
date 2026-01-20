@@ -29,6 +29,12 @@ export function Providers({ children }: ProvidersProps) {
           },
           defaultChain: base,
           supportedChains: [base],
+          // Enable embedded wallets for Base Account
+          embeddedWallets: {
+            ethereum: {
+              createOnLogin: 'users-without-wallets',
+            },
+          },
         }}
       >
         <OnchainKitProvider 

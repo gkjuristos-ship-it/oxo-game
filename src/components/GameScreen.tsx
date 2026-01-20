@@ -161,96 +161,96 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
   };
 
   return (
-    <div className="h-full w-full flex items-center justify-center p-4 py-6 overflow-y-auto" style={{ backgroundColor: colors.bgMain }} onClick={handleFirstInteraction}>
-      <div className="relative w-[320px] max-w-full my-4" style={{ borderRadius: colors.radiusXl, overflow: 'hidden' }}>
+    <div className="h-full w-full flex items-center justify-center p-2 sm:p-4 overflow-y-auto" style={{ backgroundColor: colors.bgMain }} onClick={handleFirstInteraction}>
+      <div className="relative w-full max-w-[360px] sm:max-w-[400px]" style={{ borderRadius: colors.radiusXl, overflow: 'hidden' }}>
         {/* Top panel */}
-        <div className="p-3" style={{ 
+        <div className="p-2 sm:p-3" style={{ 
           background: colors.bgPanel,
           borderBottom: `1px solid ${colors.border}`,
         }}>
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center gap-2">
             {/* Language toggle */}
-            <div className="scale-75 origin-left">
+            <div className="scale-[0.65] sm:scale-75 origin-left flex-shrink-0">
               <LanguageToggle />
             </div>
             
-            <div className="flex items-center gap-3">
-              <div className="flex gap-1">
-                <div className={`w-1.5 h-1.5 rounded-full ${isThinking ? 'animate-pulse' : ''}`} 
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-1 justify-center min-w-0">
+              <div className="flex gap-0.5 sm:gap-1 items-center flex-shrink-0">
+                <div className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${isThinking ? 'animate-pulse' : ''}`} 
                      style={{ 
                        backgroundColor: isThinking ? colors.error : `${colors.error}30`,
                        boxShadow: isThinking ? `0 0 4px ${colors.error}` : 'none' 
                      }} />
-                <span className="text-[7px] font-mono" style={{ color: colors.textMuted }}>PROC</span>
+                <span className="text-[6px] sm:text-[7px] font-mono" style={{ color: colors.textMuted }}>PROC</span>
               </div>
-              <div className="text-[8px] tracking-[0.15em] font-mono" style={{ color: colors.textMuted }}>
+              <div className="text-[7px] sm:text-[8px] tracking-[0.1em] sm:tracking-[0.15em] font-mono truncate" style={{ color: colors.textMuted }}>
                 {t('game.computing_machine')}
               </div>
-              <div className="flex gap-1">
-                <div className={`w-1.5 h-1.5 rounded-full ${isPlayerTurn && !gameResult ? 'animate-pulse' : ''}`}
+              <div className="flex gap-0.5 sm:gap-1 items-center flex-shrink-0">
+                <div className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${isPlayerTurn && !gameResult ? 'animate-pulse' : ''}`}
                      style={{ 
                        backgroundColor: isPlayerTurn && !gameResult ? colors.success : colors.primaryDim,
                        boxShadow: isPlayerTurn && !gameResult ? `0 0 4px ${colors.success}` : 'none' 
                      }} />
-                <span className="text-[7px] font-mono" style={{ color: colors.textMuted }}>RDY</span>
+                <span className="text-[6px] sm:text-[7px] font-mono" style={{ color: colors.textMuted }}>RDY</span>
               </div>
             </div>
             
             {/* Theme toggle */}
-            <div className="scale-75 origin-right">
+            <div className="scale-[0.65] sm:scale-75 origin-right flex-shrink-0">
               <ThemeToggle />
             </div>
           </div>
         </div>
 
         {/* Screen */}
-        <div className="p-4" style={{ 
+        <div className="p-2 sm:p-4" style={{ 
           background: colors.bgScreen,
           border: `1px solid ${colors.border}`,
         }}>
-          <div className="p-4 relative" style={{ backgroundColor: colors.bgScreen, borderRadius: colors.radiusMd }}>
+          <div className="p-2 sm:p-4 relative" style={{ backgroundColor: colors.bgScreen, borderRadius: colors.radiusMd }}>
             {/* Title */}
-            <div className="text-center mb-2">
-              <h1 className="text-3xl md:text-4xl tracking-[0.3em] font-mono" 
+            <div className="text-center mb-1 sm:mb-2">
+              <h1 className="text-2xl sm:text-3xl tracking-[0.25em] sm:tracking-[0.3em] font-mono" 
                   style={{ color: colors.primary, textShadow: `0 0 15px ${colors.primaryGlow}` }}>
                 {t('game.title')}
               </h1>
-              <div className="text-[10px] tracking-[0.4em] font-mono" style={{ color: colors.primaryDim }}>
+              <div className="text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.4em] font-mono" style={{ color: colors.primaryDim }}>
                 {t('game.subtitle')}
               </div>
             </div>
 
             {/* Stats */}
-            <div className="flex justify-center gap-6 mb-2 text-xs font-mono">
+            <div className="flex justify-center gap-4 sm:gap-6 mb-1.5 sm:mb-2 text-xs font-mono">
               <div className="text-center">
-                <div className="text-lg" style={{ color: colors.primary, textShadow: `0 0 8px ${colors.primaryGlow}` }}>
+                <div className="text-base sm:text-lg" style={{ color: colors.primary, textShadow: `0 0 8px ${colors.primaryGlow}` }}>
                   {stats.wins}
                 </div>
-                <div className="text-[9px]" style={{ color: colors.primaryDim }}>{t('game.wins')}</div>
+                <div className="text-[8px] sm:text-[9px]" style={{ color: colors.primaryDim }}>{t('game.wins')}</div>
               </div>
-              <div className="text-center border-x px-4" style={{ borderColor: colors.primaryDim }}>
-                <div className="text-lg" style={{ color: colors.primary, textShadow: `0 0 8px ${colors.primaryGlow}` }}>
+              <div className="text-center border-x px-3 sm:px-4" style={{ borderColor: colors.primaryDim }}>
+                <div className="text-base sm:text-lg" style={{ color: colors.primary, textShadow: `0 0 8px ${colors.primaryGlow}` }}>
                   {stats.games}
                 </div>
-                <div className="text-[9px]" style={{ color: colors.primaryDim }}>{t('game.games')}</div>
+                <div className="text-[8px] sm:text-[9px]" style={{ color: colors.primaryDim }}>{t('game.games')}</div>
               </div>
               <div className="text-center">
-                <div className="text-lg" style={{ color: colors.error, textShadow: `0 0 8px ${colors.error}` }}>
+                <div className="text-base sm:text-lg" style={{ color: colors.error, textShadow: `0 0 8px ${colors.error}` }}>
                   {stats.losses}
                 </div>
-                <div className="text-[9px]" style={{ color: colors.error }}>{t('game.losses')}</div>
+                <div className="text-[8px] sm:text-[9px]" style={{ color: colors.error }}>{t('game.losses')}</div>
               </div>
             </div>
 
             {/* Game board */}
-            <div className="flex justify-center mb-2">
+            <div className="flex justify-center mb-1.5 sm:mb-2">
               <div className="grid grid-cols-3 gap-0 border-2" style={{ borderColor: colors.primary, boxShadow: `0 0 15px ${colors.primaryGlow}` }}>
                 {board.map((cell, index) => (
                   <button
                     key={index}
                     onClick={() => handleCellClick(index)}
                     disabled={cell !== null || !isPlayerTurn || gameResult !== null}
-                    className="w-14 h-14 md:w-16 md:h-16 text-3xl md:text-4xl font-mono font-bold border transition-all duration-100"
+                    className="w-12 h-12 sm:w-14 sm:h-14 text-2xl sm:text-3xl font-mono font-bold border transition-all duration-100"
                     style={{
                       borderColor: colors.primaryDim,
                       color: cell === 'X' ? colors.playerX : cell === 'O' ? colors.playerO : colors.primaryDim,
@@ -266,7 +266,7 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
             </div>
 
             {/* Status */}
-            <div className="text-center h-5 font-mono text-xs">
+            <div className="text-center h-4 sm:h-5 font-mono text-[10px] sm:text-xs">
               {gameResult === 'draw' && (
                 <div className="animate-pulse" style={{ color: colors.primary, textShadow: `0 0 12px ${colors.primaryGlow}` }}>
                   ◆ {t('game.draw')} ◆
@@ -290,24 +290,24 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
               )}
             </div>
 
-            <div className="text-center text-[9px] font-mono tracking-wider" style={{ color: colors.primaryDim }}>
+            <div className="text-center text-[8px] sm:text-[9px] font-mono tracking-wider" style={{ color: colors.primaryDim }}>
               {t('game.draw_human')}
             </div>
           </div>
         </div>
 
         {/* Rotary dial with side controls */}
-        <div className="p-3" style={{ 
+        <div className="p-2 sm:p-3" style={{ 
           background: colors.bgPanel,
           borderTop: `1px solid ${colors.border}`,
         }}>
-          <div className="flex justify-center items-center gap-4">
+          <div className="flex justify-center items-center gap-2 sm:gap-4">
             {/* Difficulty with Music button below */}
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-1 sm:gap-2">
               <div className="flex flex-col items-center">
-                <div className="text-[8px] tracking-wider mb-1 font-mono" style={{ color: colors.textMuted }}>{t('game.level')}</div>
+                <div className="text-[7px] sm:text-[8px] tracking-wider mb-0.5 sm:mb-1 font-mono" style={{ color: colors.textMuted }}>{t('game.level')}</div>
                 <div 
-                  className="w-12 h-12 rounded-full border-2 shadow-lg flex items-center justify-center cursor-pointer active:scale-95 transition-transform relative"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 shadow-lg flex items-center justify-center cursor-pointer active:scale-95 transition-transform relative"
                   style={{ 
                     background: colors.bgScreen,
                     borderColor: colors.border,
@@ -323,7 +323,7 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
                       return (
                         <div
                           key={level}
-                          className="absolute w-1 h-1 rounded-full"
+                          className="absolute w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full"
                           style={{
                             left: `${x}%`,
                             top: `${y}%`,
@@ -336,17 +336,17 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
                     })}
                   </div>
                   <div 
-                    className="w-8 h-8 rounded-full border pointer-events-none transition-transform duration-200"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border pointer-events-none transition-transform duration-200"
                     style={{ 
                       background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
                       borderColor: colors.metalDark,
                       transform: `rotate(${-135 + (difficulty - 1) * 67.5}deg)` 
                     }}
                   >
-                    <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-3 rounded-full" style={{ top: '2px', backgroundColor: colors.bgScreen }} />
+                    <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-2.5 sm:h-3 rounded-full" style={{ top: '2px', backgroundColor: colors.bgScreen }} />
                   </div>
                 </div>
-                <div className="text-[8px] mt-1 font-mono" style={{ color: colors.primary, textShadow: `0 0 4px ${colors.primaryGlow}` }}>
+                <div className="text-[7px] sm:text-[8px] mt-0.5 sm:mt-1 font-mono" style={{ color: colors.primary, textShadow: `0 0 4px ${colors.primaryGlow}` }}>
                   {DIFFICULTY_NAMES[difficulty]}
                 </div>
               </div>
@@ -354,25 +354,25 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
               {/* Music button below level */}
               <button
                 onClick={playBootMusic}
-                className="w-8 h-8 rounded-full border flex items-center justify-center transition-all mt-1"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border flex items-center justify-center transition-all"
                 style={{ 
                   background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
                   borderColor: colors.metalDark,
                 }}
               >
-                <span className="text-xs" style={{ color: colors.primary }}>♪</span>
+                <span className="text-[10px] sm:text-xs" style={{ color: colors.primary }}>♪</span>
               </button>
             </div>
 
             {/* Rotary dial center */}
             <div className="relative">
-              <div className="text-[9px] tracking-wider mb-1 font-mono text-center" style={{ color: colors.textMuted }}>
+              <div className="text-[8px] sm:text-[9px] tracking-wider mb-0.5 sm:mb-1 font-mono text-center" style={{ color: colors.textMuted }}>
                 {t('game.rotary_input')}
               </div>
               
               <div 
                 ref={dialRef}
-                className="w-32 h-32 md:w-36 md:h-36 rounded-full border-4 shadow-lg relative transition-transform duration-300"
+                className="w-28 h-28 sm:w-32 sm:h-32 rounded-full border-4 shadow-lg relative transition-transform duration-300"
                 style={{ 
                   background: colors.bgPanel,
                   borderColor: colors.border,
@@ -392,7 +392,7 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
                       key={num}
                       onClick={() => handleDialSelect(index)}
                       disabled={!isAvailable}
-                      className="absolute w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center font-mono text-xs md:text-sm font-bold transition-all duration-100 border-2"
+                      className="absolute w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center font-mono text-[10px] sm:text-xs font-bold transition-all duration-100 border-2"
                       style={{
                         left: `${x}%`,
                         top: `${y}%`,
@@ -409,25 +409,25 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
                   );
                 })}
                 
-                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full border-2 flex items-center justify-center"
+                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 flex items-center justify-center"
                      style={{ 
                        background: colors.bgScreen,
                        borderColor: colors.border,
                      }}>
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: colors.primary }} />
+                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full" style={{ backgroundColor: colors.primary }} />
                 </div>
                 
-                <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-3 h-6 rounded-r-full border-2"
+                <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-2.5 h-5 sm:w-3 sm:h-6 rounded-r-full border-2"
                      style={{ backgroundColor: colors.bgPanel, borderColor: colors.border }} />
               </div>
             </div>
 
             {/* Volume with START button below */}
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-1 sm:gap-2">
               <div className="flex flex-col items-center">
-                <div className="text-[8px] tracking-wider mb-1 font-mono" style={{ color: colors.textMuted }}>{t('game.vol')}</div>
+                <div className="text-[7px] sm:text-[8px] tracking-wider mb-0.5 sm:mb-1 font-mono" style={{ color: colors.textMuted }}>{t('game.vol')}</div>
                 <div 
-                  className="w-12 h-12 rounded-full border-3 shadow-lg flex items-center justify-center cursor-pointer active:scale-95 transition-transform relative"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-3 shadow-lg flex items-center justify-center cursor-pointer active:scale-95 transition-transform relative"
                   style={{ 
                     background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
                     borderColor: colors.metalDark,
@@ -443,7 +443,7 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
                       return (
                         <div
                           key={level}
-                          className="absolute w-1 h-1 rounded-full"
+                          className="absolute w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full"
                           style={{
                             left: `${x}%`,
                             top: `${y}%`,
@@ -456,39 +456,39 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
                     })}
                   </div>
                   <div 
-                    className="w-8 h-8 rounded-full border pointer-events-none transition-transform duration-200"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border pointer-events-none transition-transform duration-200"
                     style={{ 
                       background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
                       borderColor: colors.metalDark,
                       transform: `rotate(${-135 + (volume - 1) * 67.5}deg)` 
                     }}
                   >
-                    <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-3 rounded-full" style={{ top: '2px', backgroundColor: colors.bgScreen }} />
+                    <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-2.5 sm:h-3 rounded-full" style={{ top: '2px', backgroundColor: colors.bgScreen }} />
                   </div>
                 </div>
-                <div className="text-[8px] mt-1 font-mono" style={{ color: colors.warning, textShadow: `0 0 4px ${colors.warning}` }}>
+                <div className="text-[7px] sm:text-[8px] mt-0.5 sm:mt-1 font-mono" style={{ color: colors.warning, textShadow: `0 0 4px ${colors.warning}` }}>
                   {volume}/5
                 </div>
               </div>
 
               {/* START button below volume */}
-              <button onClick={resetGame} className="relative mt-1">
-                <div className="w-12 h-12 rounded-full border-2 shadow-lg flex items-center justify-center"
+              <button onClick={resetGame} className="relative">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 shadow-lg flex items-center justify-center"
                      style={{ 
                        background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
                        borderColor: colors.metalDark,
                      }}>
-                  <div className="w-9 h-9 rounded-full border flex items-center justify-center transition-all"
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border flex items-center justify-center transition-all"
                        style={{ 
                          background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
                          borderColor: colors.border,
                        }}>
-                    <span className="text-[8px] font-mono tracking-wider" style={{ color: colors.primary, textShadow: `0 0 4px ${colors.primaryGlow}` }}>
+                    <span className="text-[7px] sm:text-[8px] font-mono tracking-wider" style={{ color: colors.primary, textShadow: `0 0 4px ${colors.primaryGlow}` }}>
                       START
                     </span>
                   </div>
                 </div>
-                <div className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full" 
+                <div className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full" 
                      style={{ 
                        backgroundColor: gameResult ? colors.error : colors.success,
                        boxShadow: `0 0 6px ${gameResult ? colors.error : colors.success}` 
@@ -498,12 +498,12 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
           </div>
 
           {/* Nameplate */}
-          <div className="mt-3 text-center">
-            <div className="inline-block px-6 py-2 rounded-full" style={{ 
+          <div className="mt-2 sm:mt-3 text-center">
+            <div className="inline-block px-4 py-1.5 sm:px-6 sm:py-2 rounded-full" style={{ 
               background: colors.bgScreen,
               border: `1px solid ${colors.border}`,
             }}>
-              <div className="text-[8px] tracking-[0.1em] font-mono" style={{ color: colors.textMuted }}>
+              <div className="text-[7px] sm:text-[8px] tracking-[0.1em] font-mono" style={{ color: colors.textMuted }}>
                 CAMBRIDGE • EDSAC • 1952
               </div>
             </div>
