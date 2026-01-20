@@ -1,14 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePrivy } from '@privy-io/react-auth';
+import AuthScreen from '@/components/AuthScreen';
 import SwipeNavigation from '@/components/SwipeNavigation';
 import HistoryScreen from '@/components/HistoryScreen';
 import GameScreen from '@/components/GameScreen';
 import OnlineScreen from '@/components/OnlineScreen';
 
 export default function OXOApp() {
+  const { authenticated, ready } = usePrivy();
   const [booted, setBooted] = useState(false);
   const [bootPhase, setBootPhase] = useState(0);
+  const [authCompleted, setAuthCompleted] = useState(false);
 
   // Boot sequence
   useEffect(() => {
@@ -27,6 +31,13 @@ export default function OXOApp() {
     const bootTimer = setTimeout(() => setBooted(true), 2000);
     return () => clearTimeout(bootTimer);
   }, []);
+
+  // Update auth completed status
+  useEffect(() => {
+    if (authenticated) {
+      setAuthCompleted(true);
+    }
+  }, [authenticated]);
 
   // Экран загрузки
   if (!booted) {
@@ -73,6 +84,11 @@ export default function OXOApp() {
         </div>
       </main>
     );
+  }
+
+  // Auth screen if not authenticated
+  if (ready && !authCompleted) {
+    return <AuthScreen onAuthComplete={() => setAuthCompleted(true)} />;
   }
 
   return (

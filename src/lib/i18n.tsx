@@ -70,6 +70,14 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.history': 'HISTORY',
     'nav.game': 'GAME',
     'nav.online': 'ONLINE',
+    // Auth
+    'loading': 'Loading...',
+    'welcomeTitle': 'Welcome to OXO',
+    'authDescription': 'Connect your wallet to play, compete, and earn on Base blockchain. Gasless transactions included.',
+    'connectWallet': 'Connect Wallet',
+    'authInfo1': 'Sign in with Farcaster or connect your wallet (MetaMask, Coinbase, Phantom)',
+    'authInfo2': 'All transactions are gasless within your daily limit on Base',
+    'poweredBy': 'Powered by',
   },
   zh: {
     'game.title': 'O X O',
@@ -234,6 +242,13 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.history': 'ИСТОРИЯ',
     'nav.game': 'ИГРА',
     'nav.online': 'ОНЛАЙН',
+    'loading': 'Загрузка...',
+    'welcomeTitle': 'Добро пожаловать в OXO',
+    'authDescription': 'Подключите кошелёк для игры, соревнований и заработка на Base блокчейне. Транзакции без комиссии.',
+    'connectWallet': 'Подключить кошелёк',
+    'authInfo1': 'Войдите через Farcaster или подключите кошелёк (MetaMask, Coinbase, Phantom)',
+    'authInfo2': 'Все транзакции без комиссии в рамках вашего дневного лимита на Base',
+    'poweredBy': 'На базе',
   },
   es: {
     'game.title': 'O X O',
