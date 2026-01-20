@@ -99,7 +99,7 @@ export default function OnlineScreen() {
       return (
         <div className="flex flex-col items-center justify-center h-48 gap-4">
           <div className="text-sm font-mono text-center" style={{ color: colors.warning }}>
-            {isInFrame ? 'CONNECT TO PLAY ONLINE' : 'OPEN IN FARCASTER TO PLAY'}
+            {isInFrame ? 'CONNECT TO PLAY ONLINE' : 'ONLINE MODE UNAVAILABLE'}
           </div>
           {isInFrame && (
             <button
@@ -115,8 +115,8 @@ export default function OnlineScreen() {
               CONNECT
             </button>
           )}
-          <div className="text-[9px] font-mono mt-2" style={{ color: colors.textMuted }}>
-            Farcaster authentication required
+          <div className="text-[9px] font-mono mt-2 text-center px-4" style={{ color: colors.textMuted }}>
+            {isInFrame ? 'Farcaster authentication required' : 'Open in Farcaster app for online features'}
           </div>
         </div>
       );
@@ -193,13 +193,26 @@ export default function OnlineScreen() {
                     <div className="text-[10px]" style={{ color: colors.primaryDim }}>Find a random opponent</div>
                   </div>
 
-                  {matchmakingError && (
+                  {matchmakingError && matchmakingError !== 'Not authenticated or Supabase not configured' && (
                     <div className="text-[10px] text-center font-mono" style={{ color: colors.error }}>
                       {matchmakingError}
                     </div>
                   )}
 
-                  {activeMatch ? (
+                  {matchmakingError === 'Not authenticated or Supabase not configured' ? (
+                    <div className="flex flex-col items-center gap-4 mt-6">
+                      <div className="text-center px-6 py-8 rounded-lg" style={{ backgroundColor: `${colors.warning}10`, border: `1px solid ${colors.warning}30` }}>
+                        <div className="text-lg mb-2" style={{ color: colors.warning }}>⚠ DEMO MODE</div>
+                        <div className="text-[10px] font-mono leading-relaxed" style={{ color: colors.textMuted }}>
+                          Online multiplayer requires Supabase configuration.<br/>
+                          Contact developer to enable this feature.
+                        </div>
+                      </div>
+                      <div className="text-[9px] font-mono text-center px-4" style={{ color: colors.textMuted }}>
+                        Play offline mode on the GAME tab
+                      </div>
+                    </div>
+                  ) : activeMatch ? (
                     <div className="flex flex-col items-center gap-4 mt-6">
                       <div className="text-lg animate-pulse" style={{ color: colors.primary }}>MATCH FOUND!</div>
                       <div className="text-sm" style={{ color: colors.primaryDim }}>vs OPPONENT</div>
@@ -274,13 +287,26 @@ export default function OnlineScreen() {
                     <div className="text-[10px]" style={{ color: colors.primaryDim }}>Play with friends</div>
                   </div>
 
-                  {roomError && (
+                  {roomError && roomError !== 'Not authenticated or Supabase not configured' && (
                     <div className="text-[10px] text-center font-mono" style={{ color: colors.error }}>
                       {roomError}
                     </div>
                   )}
 
-                  {privateMatch ? (
+                  {roomError === 'Not authenticated or Supabase not configured' ? (
+                    <div className="flex flex-col items-center gap-4 mt-6">
+                      <div className="text-center px-6 py-8 rounded-lg" style={{ backgroundColor: `${colors.warning}10`, border: `1px solid ${colors.warning}30` }}>
+                        <div className="text-lg mb-2" style={{ color: colors.warning }}>⚠ DEMO MODE</div>
+                        <div className="text-[10px] font-mono leading-relaxed" style={{ color: colors.textMuted }}>
+                          Private rooms require Supabase configuration.<br/>
+                          Contact developer to enable this feature.
+                        </div>
+                      </div>
+                      <div className="text-[9px] font-mono text-center px-4" style={{ color: colors.textMuted }}>
+                        Play offline mode on the GAME tab
+                      </div>
+                    </div>
+                  ) : privateMatch ? (
                     <div className="flex flex-col items-center gap-4 mt-4">
                       <div className="text-lg" style={{ color: colors.primary }}>
                         {privateMatch.status === 'waiting' ? 'WAITING FOR OPPONENT...' : 'GAME STARTED!'}
