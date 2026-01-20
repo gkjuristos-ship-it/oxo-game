@@ -302,52 +302,66 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
           borderTop: `1px solid ${colors.border}`,
         }}>
           <div className="flex justify-center items-center gap-4">
-            {/* Difficulty */}
-            <div className="flex flex-col items-center">
-              <div className="text-[8px] tracking-wider mb-1 font-mono" style={{ color: colors.textMuted }}>{t('game.level')}</div>
-              <div 
-                className="w-12 h-12 rounded-full border-2 shadow-lg flex items-center justify-center cursor-pointer active:scale-95 transition-transform relative"
-                style={{ 
-                  background: colors.bgScreen,
-                  borderColor: colors.border,
-                }}
-                onClick={changeDifficulty}
-              >
-                <div className="absolute inset-0 pointer-events-none">
-                  {[1,2,3,4,5].map((level) => {
-                    const rotation = -135 + (level - 1) * 67.5;
-                    const rad = rotation * Math.PI / 180;
-                    const x = 50 + 42 * Math.sin(rad);
-                    const y = 50 - 42 * Math.cos(rad);
-                    return (
-                      <div
-                        key={level}
-                        className="absolute w-1 h-1 rounded-full"
-                        style={{
-                          left: `${x}%`,
-                          top: `${y}%`,
-                          transform: 'translate(-50%, -50%)',
-                          backgroundColor: level <= difficulty ? colors.primary : colors.metalDark,
-                          boxShadow: level <= difficulty ? `0 0 4px ${colors.primary}` : 'none'
-                        }}
-                      />
-                    );
-                  })}
-                </div>
+            {/* Difficulty with Music button below */}
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex flex-col items-center">
+                <div className="text-[8px] tracking-wider mb-1 font-mono" style={{ color: colors.textMuted }}>{t('game.level')}</div>
                 <div 
-                  className="w-8 h-8 rounded-full border pointer-events-none transition-transform duration-200"
+                  className="w-12 h-12 rounded-full border-2 shadow-lg flex items-center justify-center cursor-pointer active:scale-95 transition-transform relative"
                   style={{ 
-                    background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
-                    borderColor: colors.metalDark,
-                    transform: `rotate(${-135 + (difficulty - 1) * 67.5}deg)` 
+                    background: colors.bgScreen,
+                    borderColor: colors.border,
                   }}
+                  onClick={changeDifficulty}
                 >
-                  <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-3 rounded-full" style={{ top: '2px', backgroundColor: colors.bgScreen }} />
+                  <div className="absolute inset-0 pointer-events-none">
+                    {[1,2,3,4,5].map((level) => {
+                      const rotation = -135 + (level - 1) * 67.5;
+                      const rad = rotation * Math.PI / 180;
+                      const x = 50 + 42 * Math.sin(rad);
+                      const y = 50 - 42 * Math.cos(rad);
+                      return (
+                        <div
+                          key={level}
+                          className="absolute w-1 h-1 rounded-full"
+                          style={{
+                            left: `${x}%`,
+                            top: `${y}%`,
+                            transform: 'translate(-50%, -50%)',
+                            backgroundColor: level <= difficulty ? colors.primary : colors.metalDark,
+                            boxShadow: level <= difficulty ? `0 0 4px ${colors.primary}` : 'none'
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
+                  <div 
+                    className="w-8 h-8 rounded-full border pointer-events-none transition-transform duration-200"
+                    style={{ 
+                      background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
+                      borderColor: colors.metalDark,
+                      transform: `rotate(${-135 + (difficulty - 1) * 67.5}deg)` 
+                    }}
+                  >
+                    <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-3 rounded-full" style={{ top: '2px', backgroundColor: colors.bgScreen }} />
+                  </div>
+                </div>
+                <div className="text-[8px] mt-1 font-mono" style={{ color: colors.primary, textShadow: `0 0 4px ${colors.primaryGlow}` }}>
+                  {DIFFICULTY_NAMES[difficulty]}
                 </div>
               </div>
-              <div className="text-[8px] mt-1 font-mono" style={{ color: colors.primary, textShadow: `0 0 4px ${colors.primaryGlow}` }}>
-                {DIFFICULTY_NAMES[difficulty]}
-              </div>
+
+              {/* Music button below level */}
+              <button
+                onClick={playBootMusic}
+                className="w-8 h-8 rounded-full border flex items-center justify-center transition-all mt-1"
+                style={{ 
+                  background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
+                  borderColor: colors.metalDark,
+                }}
+              >
+                <span className="text-xs" style={{ color: colors.primary }}>♪</span>
+              </button>
             </div>
 
             {/* Rotary dial center */}
@@ -408,80 +422,71 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
               </div>
             </div>
 
-            {/* Volume */}
-            <div className="flex flex-col items-center">
-              <div className="text-[8px] tracking-wider mb-1 font-mono" style={{ color: colors.textMuted }}>{t('game.vol')}</div>
-              <div 
-                className="w-12 h-12 rounded-full border-3 shadow-lg flex items-center justify-center cursor-pointer active:scale-95 transition-transform relative"
-                style={{ 
-                  background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
-                  borderColor: colors.metalDark,
-                }}
-                onClick={changeVolume}
-              >
-                <div className="absolute inset-0 pointer-events-none">
-                  {[1,2,3,4,5].map((level) => {
-                    const rotation = -135 + (level - 1) * 67.5;
-                    const rad = rotation * Math.PI / 180;
-                    const x = 50 + 42 * Math.sin(rad);
-                    const y = 50 - 42 * Math.cos(rad);
-                    return (
-                      <div
-                        key={level}
-                        className="absolute w-1 h-1 rounded-full"
-                        style={{
-                          left: `${x}%`,
-                          top: `${y}%`,
-                          transform: 'translate(-50%, -50%)',
-                          backgroundColor: level <= volume ? colors.warning : colors.metalDark,
-                          boxShadow: level <= volume ? `0 0 4px ${colors.warning}` : 'none'
-                        }}
-                      />
-                    );
-                  })}
-                </div>
+            {/* Volume with START button below */}
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex flex-col items-center">
+                <div className="text-[8px] tracking-wider mb-1 font-mono" style={{ color: colors.textMuted }}>{t('game.vol')}</div>
                 <div 
-                  className="w-8 h-8 rounded-full border pointer-events-none transition-transform duration-200"
+                  className="w-12 h-12 rounded-full border-3 shadow-lg flex items-center justify-center cursor-pointer active:scale-95 transition-transform relative"
                   style={{ 
                     background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
                     borderColor: colors.metalDark,
-                    transform: `rotate(${-135 + (volume - 1) * 67.5}deg)` 
                   }}
+                  onClick={changeVolume}
                 >
-                  <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-3 rounded-full" style={{ top: '2px', backgroundColor: colors.bgScreen }} />
+                  <div className="absolute inset-0 pointer-events-none">
+                    {[1,2,3,4,5].map((level) => {
+                      const rotation = -135 + (level - 1) * 67.5;
+                      const rad = rotation * Math.PI / 180;
+                      const x = 50 + 42 * Math.sin(rad);
+                      const y = 50 - 42 * Math.cos(rad);
+                      return (
+                        <div
+                          key={level}
+                          className="absolute w-1 h-1 rounded-full"
+                          style={{
+                            left: `${x}%`,
+                            top: `${y}%`,
+                            transform: 'translate(-50%, -50%)',
+                            backgroundColor: level <= volume ? colors.warning : colors.metalDark,
+                            boxShadow: level <= volume ? `0 0 4px ${colors.warning}` : 'none'
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
+                  <div 
+                    className="w-8 h-8 rounded-full border pointer-events-none transition-transform duration-200"
+                    style={{ 
+                      background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
+                      borderColor: colors.metalDark,
+                      transform: `rotate(${-135 + (volume - 1) * 67.5}deg)` 
+                    }}
+                  >
+                    <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-3 rounded-full" style={{ top: '2px', backgroundColor: colors.bgScreen }} />
+                  </div>
+                </div>
+                <div className="text-[8px] mt-1 font-mono" style={{ color: colors.warning, textShadow: `0 0 4px ${colors.warning}` }}>
+                  {volume}/5
                 </div>
               </div>
-              <div className="text-[8px] mt-1 font-mono" style={{ color: colors.warning, textShadow: `0 0 4px ${colors.warning}` }}>
-                {volume}/5
-              </div>
-            </div>
-          </div>
 
-          {/* Nameplate */}
-          <div className="mt-3 text-center">
-            <div className="inline-flex gap-3">
-              {/* Music button */}
-              <button
-                onClick={playBootMusic}
-                className="px-3 py-2 rounded-full border transition-all"
-                style={{ 
-                  background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
-                  borderColor: colors.metalDark,
-                }}
-              >
-                <span className="text-[10px] font-mono tracking-wider" style={{ color: colors.primary }}>♪ {t('game.music')}</span>
-              </button>
-
-              {/* START button */}
-              <button onClick={resetGame} className="relative">
-                <div className="px-4 py-2 rounded-full border-2 shadow-lg flex items-center justify-center"
+              {/* START button below volume */}
+              <button onClick={resetGame} className="relative mt-1">
+                <div className="w-12 h-12 rounded-full border-2 shadow-lg flex items-center justify-center"
                      style={{ 
                        background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
                        borderColor: colors.metalDark,
                      }}>
-                  <span className="text-[10px] font-mono tracking-wider" style={{ color: colors.primary, textShadow: `0 0 4px ${colors.primaryGlow}` }}>
-                    START
-                  </span>
+                  <div className="w-9 h-9 rounded-full border flex items-center justify-center transition-all"
+                       style={{ 
+                         background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
+                         borderColor: colors.border,
+                       }}>
+                    <span className="text-[8px] font-mono tracking-wider" style={{ color: colors.primary, textShadow: `0 0 4px ${colors.primaryGlow}` }}>
+                      START
+                    </span>
+                  </div>
                 </div>
                 <div className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full" 
                      style={{ 
@@ -489,15 +494,17 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
                        boxShadow: `0 0 6px ${gameResult ? colors.error : colors.success}` 
                      }} />
               </button>
+            </div>
+          </div>
 
-              {/* CAMBRIDGE • EDSAC • 1952 */}
-              <div className="px-4 py-2 rounded-full" style={{ 
-                background: colors.bgScreen,
-                border: `1px solid ${colors.border}`,
-              }}>
-                <div className="text-[8px] tracking-[0.1em] font-mono" style={{ color: colors.textMuted }}>
-                  CAMBRIDGE • EDSAC • 1952
-                </div>
+          {/* Nameplate */}
+          <div className="mt-3 text-center">
+            <div className="inline-block px-6 py-2 rounded-full" style={{ 
+              background: colors.bgScreen,
+              border: `1px solid ${colors.border}`,
+            }}>
+              <div className="text-[8px] tracking-[0.1em] font-mono" style={{ color: colors.textMuted }}>
+                CAMBRIDGE • EDSAC • 1952
               </div>
             </div>
           </div>
