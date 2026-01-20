@@ -110,19 +110,32 @@ export default function SwipeNavigation({
 
   return (
     <div className="relative w-full h-full overflow-hidden" style={{ backgroundColor: colors.bgMain }}>
-      {/* Page indicators */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-50 flex gap-2">
+      {/* Page indicators with labels */}
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-4">
         {children.map((_, index) => (
           <button
             key={index}
             onClick={() => goToPage(index)}
-            className="h-2 rounded-full transition-all duration-300"
-            style={{
-              width: index === currentPage ? '24px' : '8px',
-              backgroundColor: index === currentPage ? colors.primary : colors.border,
-              boxShadow: index === currentPage ? `0 0 8px ${colors.primary}` : 'none',
-            }}
-          />
+            className="flex flex-col items-center gap-1 transition-all duration-300"
+          >
+            <div
+              className="h-2 rounded-full"
+              style={{
+                width: index === currentPage ? '24px' : '8px',
+                backgroundColor: index === currentPage ? colors.primary : colors.border,
+                boxShadow: index === currentPage ? `0 0 8px ${colors.primary}` : 'none',
+              }}
+            />
+            <span 
+              className="text-[10px] font-mono tracking-wider uppercase"
+              style={{ 
+                color: index === currentPage ? colors.primary : colors.textMuted,
+                textShadow: index === currentPage ? `0 0 5px ${colors.primary}` : 'none',
+              }}
+            >
+              {index === 0 ? t('nav.history') : index === 1 ? t('nav.game') : t('nav.online')}
+            </span>
+          </button>
         ))}
       </div>
 
@@ -156,23 +169,10 @@ export default function SwipeNavigation({
         </button>
       )}
 
-      {/* Page labels */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-50 flex gap-8 text-[10px] font-mono tracking-wider">
-        <span style={{ color: currentPage === 0 ? colors.primary : colors.textMuted }}>
-          ← {t('nav.history')}
-        </span>
-        <span style={{ color: currentPage === 1 ? colors.primary : colors.textMuted }}>
-          {t('nav.game')}
-        </span>
-        <span style={{ color: currentPage === 2 ? colors.primary : colors.textMuted }}>
-          {t('nav.online')} →
-        </span>
-      </div>
-
       {/* Pages container */}
       <div
         ref={containerRef}
-        className="flex h-full w-full pt-10 pb-10"
+        className="flex h-full w-full pt-14 pb-4"
         style={{
           transform: `translateX(calc(${-currentPage * 100}% + ${dragOffset}px))`,
           transition: isDragging ? 'none' : 'transform 0.3s ease-out',

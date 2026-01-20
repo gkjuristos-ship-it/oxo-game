@@ -161,8 +161,8 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
   };
 
   return (
-    <div className="h-full w-full flex items-center justify-center p-4 overflow-y-auto" style={{ backgroundColor: colors.bgMain }} onClick={handleFirstInteraction}>
-      <div className="relative w-[320px] max-w-full" style={{ borderRadius: colors.radiusXl, overflow: 'hidden' }}>
+    <div className="h-full w-full flex items-center justify-center p-4 py-6 overflow-y-auto" style={{ backgroundColor: colors.bgMain }} onClick={handleFirstInteraction}>
+      <div className="relative w-[320px] max-w-full my-4" style={{ borderRadius: colors.radiusXl, overflow: 'hidden' }}>
         {/* Top panel */}
         <div className="p-3" style={{ 
           background: colors.bgPanel,
@@ -221,14 +221,14 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
             </div>
 
             {/* Stats */}
-            <div className="flex justify-center gap-4 mb-2 text-xs font-mono">
+            <div className="flex justify-center gap-6 mb-2 text-xs font-mono">
               <div className="text-center">
                 <div className="text-lg" style={{ color: colors.primary, textShadow: `0 0 8px ${colors.primaryGlow}` }}>
                   {stats.wins}
                 </div>
                 <div className="text-[9px]" style={{ color: colors.primaryDim }}>{t('game.wins')}</div>
               </div>
-              <div className="text-center border-x px-3" style={{ borderColor: colors.primaryDim }}>
+              <div className="text-center border-x px-4" style={{ borderColor: colors.primaryDim }}>
                 <div className="text-lg" style={{ color: colors.primary, textShadow: `0 0 8px ${colors.primaryGlow}` }}>
                   {stats.games}
                 </div>
@@ -296,12 +296,61 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
           </div>
         </div>
 
-        {/* Rotary dial */}
+        {/* Rotary dial with side controls */}
         <div className="p-3" style={{ 
           background: colors.bgPanel,
           borderTop: `1px solid ${colors.border}`,
         }}>
-          <div className="flex justify-center">
+          <div className="flex justify-center items-center gap-4">
+            {/* Difficulty */}
+            <div className="flex flex-col items-center">
+              <div className="text-[8px] tracking-wider mb-1 font-mono" style={{ color: colors.textMuted }}>{t('game.level')}</div>
+              <div 
+                className="w-12 h-12 rounded-full border-2 shadow-lg flex items-center justify-center cursor-pointer active:scale-95 transition-transform relative"
+                style={{ 
+                  background: colors.bgScreen,
+                  borderColor: colors.border,
+                }}
+                onClick={changeDifficulty}
+              >
+                <div className="absolute inset-0 pointer-events-none">
+                  {[1,2,3,4,5].map((level) => {
+                    const rotation = -135 + (level - 1) * 67.5;
+                    const rad = rotation * Math.PI / 180;
+                    const x = 50 + 42 * Math.sin(rad);
+                    const y = 50 - 42 * Math.cos(rad);
+                    return (
+                      <div
+                        key={level}
+                        className="absolute w-1 h-1 rounded-full"
+                        style={{
+                          left: `${x}%`,
+                          top: `${y}%`,
+                          transform: 'translate(-50%, -50%)',
+                          backgroundColor: level <= difficulty ? colors.primary : colors.metalDark,
+                          boxShadow: level <= difficulty ? `0 0 4px ${colors.primary}` : 'none'
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+                <div 
+                  className="w-8 h-8 rounded-full border pointer-events-none transition-transform duration-200"
+                  style={{ 
+                    background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
+                    borderColor: colors.metalDark,
+                    transform: `rotate(${-135 + (difficulty - 1) * 67.5}deg)` 
+                  }}
+                >
+                  <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-3 rounded-full" style={{ top: '2px', backgroundColor: colors.bgScreen }} />
+                </div>
+              </div>
+              <div className="text-[8px] mt-1 font-mono" style={{ color: colors.primary, textShadow: `0 0 4px ${colors.primaryGlow}` }}>
+                {DIFFICULTY_NAMES[difficulty]}
+              </div>
+            </div>
+
+            {/* Rotary dial center */}
             <div className="relative">
               <div className="text-[9px] tracking-wider mb-1 font-mono text-center" style={{ color: colors.textMuted }}>
                 {t('game.rotary_input')}
@@ -358,125 +407,6 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
                      style={{ backgroundColor: colors.bgPanel, borderColor: colors.border }} />
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Control panel */}
-        <div className="p-3" style={{ 
-          background: colors.bgPanel,
-          borderTop: `1px solid ${colors.border}`,
-        }}>
-          <div className="flex justify-between items-end gap-2">
-            
-            {/* Difficulty */}
-            <div className="flex flex-col items-center">
-              <div className="text-[8px] tracking-wider mb-1 font-mono" style={{ color: colors.textMuted }}>{t('game.level')}</div>
-              <div 
-                className="w-12 h-12 rounded-full border-2 shadow-lg flex items-center justify-center cursor-pointer active:scale-95 transition-transform relative"
-                style={{ 
-                  background: colors.bgScreen,
-                  borderColor: colors.border,
-                }}
-                onClick={changeDifficulty}
-              >
-                <div className="absolute inset-0 pointer-events-none">
-                  {[1,2,3,4,5].map((level) => {
-                    const rotation = -135 + (level - 1) * 67.5;
-                    const rad = rotation * Math.PI / 180;
-                    const x = 50 + 42 * Math.sin(rad);
-                    const y = 50 - 42 * Math.cos(rad);
-                    return (
-                      <div
-                        key={level}
-                        className="absolute w-1 h-1 rounded-full"
-                        style={{
-                          left: `${x}%`,
-                          top: `${y}%`,
-                          transform: 'translate(-50%, -50%)',
-                          backgroundColor: level <= difficulty ? colors.primary : colors.metalDark,
-                          boxShadow: level <= difficulty ? `0 0 4px ${colors.primary}` : 'none'
-                        }}
-                      />
-                    );
-                  })}
-                </div>
-                <div 
-                  className="w-8 h-8 rounded-full border pointer-events-none transition-transform duration-200"
-                  style={{ 
-                    background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
-                    borderColor: colors.metalDark,
-                    transform: `rotate(${-135 + (difficulty - 1) * 67.5}deg)` 
-                  }}
-                >
-                  <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-3 rounded-full" style={{ top: '2px', backgroundColor: colors.bgScreen }} />
-                </div>
-              </div>
-              <div className="text-[8px] mt-1 font-mono" style={{ color: colors.primary, textShadow: `0 0 4px ${colors.primaryGlow}` }}>
-                {DIFFICULTY_NAMES[difficulty]}
-              </div>
-            </div>
-
-            {/* Music */}
-            <div className="flex flex-col items-center">
-              <div className="text-[8px] tracking-wider mb-1 font-mono" style={{ color: colors.textMuted }}>{t('game.music')}</div>
-              <button
-                onClick={playBootMusic}
-                className="w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all"
-                style={{ 
-                  background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
-                  borderColor: colors.metalDark,
-                }}
-              >
-                <span style={{ color: colors.primary }}>♪</span>
-              </button>
-            </div>
-
-            {/* START */}
-            <div className="flex flex-col items-center">
-              <button onClick={resetGame} className="relative group">
-                <div className="w-16 h-16 rounded-full border-4 shadow-lg flex items-center justify-center"
-                     style={{ 
-                       background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
-                       borderColor: colors.metalDark,
-                     }}>
-                  <div className="w-11 h-11 rounded-full border-2 flex items-center justify-center transition-all"
-                       style={{ 
-                         background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
-                         borderColor: colors.border,
-                       }}>
-                    <span className="text-[9px] font-mono tracking-wider" style={{ color: colors.primary, textShadow: `0 0 4px ${colors.primaryGlow}` }}>
-                      START
-                    </span>
-                  </div>
-                </div>
-                <div className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full" 
-                     style={{ 
-                       backgroundColor: gameResult ? colors.error : colors.success,
-                       boxShadow: `0 0 6px ${gameResult ? colors.error : colors.success}` 
-                     }} />
-              </button>
-              <div className="text-[8px] tracking-wider mt-1 font-mono" style={{ color: colors.textMuted }}>{t('game.new')}</div>
-            </div>
-
-            {/* Reset */}
-            <div className="flex flex-col items-center">
-              <div className="text-[8px] tracking-wider mb-1 font-mono" style={{ color: colors.textMuted }}>{t('game.reset')}</div>
-              <button
-                onClick={() => {
-                  handleFirstInteraction();
-                  if (volume > 0) playButtonPress();
-                  setStats({ wins: 0, losses: 0, games: 0 });
-                  resetGame();
-                }}
-                className="w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all"
-                style={{ 
-                  background: `linear-gradient(to bottom, ${colors.error}40, ${colors.error}20)`,
-                  borderColor: colors.metalDark,
-                }}
-              >
-                <span style={{ color: colors.error }}>↺</span>
-              </button>
-            </div>
 
             {/* Volume */}
             <div className="flex flex-col items-center">
@@ -529,12 +459,45 @@ export default function GameScreen({ onFirstInteraction }: GameScreenProps) {
 
           {/* Nameplate */}
           <div className="mt-3 text-center">
-            <div className="inline-block px-4 py-2 rounded-full" style={{ 
-              background: colors.bgScreen,
-              border: `1px solid ${colors.border}`,
-            }}>
-              <div className="text-[8px] tracking-[0.1em] font-mono" style={{ color: colors.textMuted }}>
-                CAMBRIDGE • EDSAC • 1952
+            <div className="inline-flex gap-3">
+              {/* Music button */}
+              <button
+                onClick={playBootMusic}
+                className="px-3 py-2 rounded-full border transition-all"
+                style={{ 
+                  background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
+                  borderColor: colors.metalDark,
+                }}
+              >
+                <span className="text-[10px] font-mono tracking-wider" style={{ color: colors.primary }}>♪ {t('game.music')}</span>
+              </button>
+
+              {/* START button */}
+              <button onClick={resetGame} className="relative">
+                <div className="px-4 py-2 rounded-full border-2 shadow-lg flex items-center justify-center"
+                     style={{ 
+                       background: `linear-gradient(to bottom, ${colors.metalLight}, ${colors.metalDark})`,
+                       borderColor: colors.metalDark,
+                     }}>
+                  <span className="text-[10px] font-mono tracking-wider" style={{ color: colors.primary, textShadow: `0 0 4px ${colors.primaryGlow}` }}>
+                    START
+                  </span>
+                </div>
+                <div className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full" 
+                     style={{ 
+                       backgroundColor: gameResult ? colors.error : colors.success,
+                       boxShadow: `0 0 6px ${gameResult ? colors.error : colors.success}` 
+                     }} />
+              </button>
+
+              {/* CAMBRIDGE • EDSAC • 1952 */}
+              <div className="px-4 py-2 rounded-full" style={{ 
+                background: colors.bgScreen,
+                border: `1px solid ${colors.border}`,
+              }}>
+                <div className="text-[8px] tracking-[0.1em] font-mono" style={{ color: colors.textMuted }}>
+                  CAMBRIDGE • EDSAC • 1952
+                </div>
               </div>
             </div>
           </div>
