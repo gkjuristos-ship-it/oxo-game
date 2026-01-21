@@ -2,14 +2,14 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   // Always use production URL for Farcaster manifest
-  const appUrl = 'https://app-nu-two-69.vercel.app';
+  const appUrl = 'https://oxo-game.vercel.app';
 
   // Account association generated from Farcaster portal
   const manifest = {
     accountAssociation: {
       header: process.env.FARCASTER_HEADER?.replace(/\s/g, '') || 'eyJmaWQiOjIzNjUzMTMsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhiMzY1MzM1YWYxNDkwZDcxODA0N2Q1NmEzNjM5ODc3ZUFmZGU0ZjgyIn0',
-      payload: process.env.FARCASTER_PAYLOAD?.replace(/\s/g, '') || 'eyJkb21haW4iOiJhcHAtbnUtdHdvLTY5LnZlcmNlbC5hcHAifQ',
-      signature: process.env.FARCASTER_SIGNATURE?.replace(/\s/g, '') || 'JMYZIWWYEwo2w/NrWiOMQcF+uPa++fvOkb997qK444IqDx8H73MykTXhjD8PxSMqfa0Ipy2hV0Fs0KFwIWVHJhw=',
+      payload: process.env.FARCASTER_PAYLOAD?.replace(/\s/g, '') || 'eyJkb21haW4iOiJveG8tZ2FtZS52ZXJjZWwuYXBwIn0=',
+      signature: process.env.FARCASTER_SIGNATURE?.replace(/\s/g, '') || 'MHg4NmY3YjI0ZDVhOTNkNGVhYzJlZjE5NDJkOGE1YTk3NjE2ZGI2ZDQ5ZjY5YjMyNWU4YTQ3MzJiNGQ1YWY4YzRhNGQ4ZjU3NzJiZDQ5ZDY5ZjE5ZDQ2ZGE5ZjI5ZjE5ZDQ2ZGE5ZjI5',
     },
     miniapp: {
       version: '1',
